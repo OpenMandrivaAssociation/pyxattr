@@ -32,3 +32,13 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING NEWS README PKG-INFO
 %{python_sitearch}/*
 
+
+
+%changelog
+* Wed Jun 08 2011 Antoine Ginies <aginies@mandriva.com> 0.4.0-1mdv2011.0
++ Revision: 683280
+- import pyxattr
+
+
+* Wed Jun 8 2011 Antoine Ginies <aginies@mandriva.com> 0.4.0
+- first release for Mandriva based on OpenSUSE SRPM

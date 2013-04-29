@@ -1,14 +1,13 @@
 Name:           pyxattr
 Version:        0.4.0
-Release:        %mkrel 1
+Release:        2
 Summary:        Extended attributes library wrapper for Python
 License:        LGPLv2+
 Group:          Development/Python
 URL:            http://pyxattr.sourceforge.net/
 Source:         http://downloads.sourceforge.net/pyxattr/pyxattr-%{version}.tar.gz
 BuildRequires:  python-devel
-BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildRequires:  python-setuptools libattr-devel
+BuildRequires:  python-setuptools attr-devel
 #### from looking at it, I'm pretty sure we are conflictiong with python-xattr :-(
 #### same namespace, differenct functions...
 Conflicts:      python-xattr
@@ -24,11 +23,9 @@ add and remove extended attributes from files and directories.
 CFLAGS="%{optflags}" %{__python} setup.py build
 
 %install
-rm -rf $RPM_BUILD_ROOT
-%{__python} setup.py install --root $RPM_BUILD_ROOT --install-purelib=%{python_sitearch}
+%{__python} setup.py install --root %{buildroot} --install-purelib=%{python_sitearch}
 
 %files 
-%defattr(-,root,root)
 %doc COPYING NEWS README PKG-INFO
 %{python_sitearch}/*
 

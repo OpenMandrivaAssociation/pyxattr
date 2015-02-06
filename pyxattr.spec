@@ -1,6 +1,6 @@
 Name:           pyxattr
 Version:        0.4.0
-Release:        2
+Release:        3
 Summary:        Extended attributes library wrapper for Python
 License:        LGPLv2+
 Group:          Development/Python

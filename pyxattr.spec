@@ -1,41 +1,34 @@
-Name:           pyxattr
-Version:        0.4.0
-Release:        3
-Summary:        Extended attributes library wrapper for Python
-License:        LGPLv2+
-Group:          Development/Python
-URL:            http://pyxattr.sourceforge.net/
-Source:         http://downloads.sourceforge.net/pyxattr/pyxattr-%{version}.tar.gz
-BuildRequires:  python-devel
-BuildRequires:  python-setuptools attr-devel
+Name:		pyxattr
+Version:	0.8.1
+Release:	1
+Summary:	Extended attributes library wrapper for Python
+License:	LGPLv2+
+Group:		Development/Python
+URL:		https://pyxattr.k1024.org/
+Source:		https://pyxattr.k1024.org/downloads/%{name}-%{version}.tar.gz
+BuildRequires:	pkgconfig(python)
+BuildRequires:	python-setuptools
+BuildRequires:	pkgconfig(libattr)
 #### from looking at it, I'm pretty sure we are conflictiong with python-xattr :-(
 #### same namespace, differenct functions...
-Conflicts:      python-xattr
+Conflicts:	python-xattr
+Provides:	python-%{name} = %{EVRD}
 
 %description
 Python extension module wrapper for libattr. It allows to query, list,
 add and remove extended attributes from files and directories.
 
 %prep
-%setup -q
+%autosetup -p1
+
+sed -i -e "s/-Werror//g" setup.py
 
 %build
-CFLAGS="%{optflags}" %{__python} setup.py build
+%py_build
 
 %install
-%{__python} setup.py install --root %{buildroot} --install-purelib=%{python_sitearch}
+%py_install
 
-%files 
-%doc COPYING NEWS README PKG-INFO
+%files
+%doc COPYING NEWS.md README.md PKG-INFO
 %{python_sitearch}/*
-
-
-
-%changelog
-* Wed Jun 08 2011 Antoine Ginies <aginies@mandriva.com> 0.4.0-1mdv2011.0
-+ Revision: 683280
-- import pyxattr
-
-
-* Wed Jun 8 2011 Antoine Ginies <aginies@mandriva.com> 0.4.0
-- first release for Mandriva based on OpenSUSE SRPM

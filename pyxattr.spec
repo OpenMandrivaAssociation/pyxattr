@@ -1,6 +1,6 @@
 Name:		pyxattr
 Version:	0.8.1
-Release:	2
+Release:	3
 Summary:	Extended attributes library wrapper for Python
 License:	LGPLv2+
 Group:		Development/Python
@@ -29,6 +29,7 @@ rm -rf %{name}.egg-info
 sed -i -e "s/-Werror//g" setup.py
 
 %build
+export LDFLAGS="%{ldflags} -lpython%{py_ver}"
 %py_build
 
 %install
